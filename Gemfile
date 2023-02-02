@@ -52,5 +52,6 @@ group :development do
   # パフォーマンスチェック用
   gem 'rubocop-performance', require: false
   # RSpecに対しても、フォーマットを整える
+  gem 'bullet'
   gem 'rubocop-rspec' # 追加
 end
