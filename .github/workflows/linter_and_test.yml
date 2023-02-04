@@ -5,9 +5,11 @@
 # This workflow will install a prebuilt Ruby version, install dependencies, and
 # run tests and linters.
 name: "linter_and_test"
-on: [push]
+on:
+  - push
+  - pull_request
 jobs:
-  test:
+  rspec:
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -23,25 +25,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@ee2113536afb7f793eed4ce60e8d3b26db912da4 # v1.127.0
         with:
-          ruby-version: 3.1.3
           bundler-cache: true
-      - name: Setup test database
-        run: bin/rails db:schema:load
+      - name: Set up database schema
+        run: bundle exec rails db:create db:schema:load db:seed
       - name: run rspec
         run: bundle exec rspec
 
   lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@ee2113536afb7f793eed4ce60e8d3b26db912da4 # v1.127.0
         with:
-          ruby-version: 3.1.3
           bundler-cache: true
       - name: Lint Ruby files
         run: bundle exec rubocop --parallel
