@@ -1,0 +1,22 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+# 毎週月曜日の6時に依存関係を更新するPRを作成してくれる
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Tokyo"
+    ignore:
+      - dependency-name: "*"
+      # 全てのgemに対してセマンティックバージョンのパッチバージョンの更新を無視するとしています。（例：　2.0.1 => 2.0.2 は無視）
+      # 最初はパッチバージョンも取り込んでいたのですが、頻度が多すぎるのとあまりインパクトのある変更内容はなかったため、マイナーバージョンのアップデートだけ追従すれば十分と判断しました。
+        update-types: ["version-update:semver-patch"]
+      # parserは、Rubyのバージョンと合わせる必要があるため、対象から除外しています。
+      - dependency-name: "parser"
