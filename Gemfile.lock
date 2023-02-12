@@ -135,7 +135,7 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    puma (5.6.5)
+    puma (6.1.0)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
@@ -240,7 +240,7 @@ DEPENDENCIES
   factory_bot_rails
   mysql2 (~> 0.5)
   pry-rails
-  puma (~> 5.0)
+  puma (~> 6.1)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.2)
   rspec-rails
